@@ -33,10 +33,14 @@ int main(int argc, char** argv)
 
 	file.open("data/names.txt");
 
+	// Read file, each line separately
+	// For each read word call generateNote
+	// if fourth argument was given, for this name
+	// on the list print 5
 	while(file >> name) {
 		if(argc == 4) {
 			if(name == except){
-				std::cout << "Magda: 5" << std::endl;
+				std::cout << name << ": 5" << std::endl;
 				continue;
 			}
 		}
