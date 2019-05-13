@@ -17,14 +17,16 @@ int main(int argc, char** argv)
 {
 	std::ifstream file;
 	std::string name;
+	std::string except;
 
-	if(argc != 4) {
+	if((argc < 3) || (argc > 4)) {
 		std::cout << "Usage: " << std::endl;
-		std::cout << argv[0] << " <lower bound> <higher bound> <name_to_except>" << std::endl;
+		std::cout << argv[0] << " <lower bound> <higher bound> [name_to_except]" << std::endl;
 		return 1;
 	}
 
-	std::string except = argv[3];
+	if(argc == 4)
+		except = argv[3];
 
 	int lower = atoi(argv[1]);
 	int upper = atoi(argv[2]);
@@ -32,11 +34,13 @@ int main(int argc, char** argv)
 	file.open("data/names.txt");
 
 	while(file >> name) {
-		if(name == except){
-			std::cout << "Magda: 5" << std::endl;
-		} else {
-			std::cout << name << ": " << generateNote(lower, upper) << std::endl;
-		}	
-	}
+		if(argc == 4) {
+			if(name == except){
+				std::cout << "Magda: 5" << std::endl;
+				continue;
+			}
+		}
+		std::cout << name << ": " << generateNote(lower, upper) << std::endl;
+	}	
 }
 
